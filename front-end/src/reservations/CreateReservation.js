@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function CreateReservation() {
+  const history = useHistory();
+
+  //TODO: implement handlers below and on buttons
+  //    const handleSubmit;
+  //    const handleReset;
+
   return (
     <>
       <h1>Create a New Reservation</h1>
@@ -104,7 +111,11 @@ function CreateReservation() {
         >
           Reset Form
         </button>
-        <button type="button" className="btn btn-secondary btn-lg">
+        <button
+          type="button"
+          className="btn btn-secondary btn-lg"
+          onClick={() => history.go(-1)}
+        >
           Cancel
         </button>
       </form>
