@@ -89,6 +89,24 @@ function CreateReservation() {
             required
           />
         </div>
+
+        <button
+          type="submit"
+          className="btn btn-primary btn-lg"
+          style={{ marginRight: "10px" }}
+        >
+          Submit
+        </button>
+        <button
+          type="reset"
+          className="btn btn-secondary btn-lg"
+          style={{ marginRight: "10px" }}
+        >
+          Reset Form
+        </button>
+        <button type="button" className="btn btn-secondary btn-lg">
+          Cancel
+        </button>
       </form>
     </>
   );
