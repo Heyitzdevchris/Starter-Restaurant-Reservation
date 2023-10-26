@@ -31,7 +31,7 @@ function ReservationCard({
         className="card-footer border-secondary text-secondary"
         style={{ textAlign: "right" }}
       >
-        Reservation #: {resevation_id}
+        Reservation #: {reservation_id}
       </div>
     </div>
   );
