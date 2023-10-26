@@ -56,14 +56,13 @@ function Dashboard({ date }) {
       </main>
     );
   } else if (reservationsError === null && !reservations.length) {
-    /* If no error is returned from server and no reservations exist... */
     return (
       <main>
         <h1>Dashboard</h1>
         <div className="d-md-flex mb-3">
           <h4 className="mb-0">Reservations for {date}</h4>
         </div>
-        <h2>No reservation on this date.</h2>
+        <h2>No reservations on this date.</h2>
         <div className="dateNav">
           <DateNavButtons currentDate={date} />
         </div>
