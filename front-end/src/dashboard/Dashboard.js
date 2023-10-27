@@ -3,7 +3,6 @@ import { listReservations } from "../utils/api";
 import ReservationCard from "./ReservationCard";
 import DateNavButtons from "./DateNavButtons";
 import ErrorAlert from "../layout/ErrorAlert";
-
 /**
  * Defines the dashboard page.
  * @param date
@@ -24,8 +23,8 @@ function Dashboard({ date }) {
       .catch(setReservationsError);
     return () => abortController.abort();
   }
-
-  /* If no error is returned from server and reservation exist, display info */
+  
+  /* If no error is returned from server and reservations exist, display info */
   if (reservationsError === null && reservations.length) {
     return (
       <main>
@@ -34,7 +33,7 @@ function Dashboard({ date }) {
           <h4 className="mb-0">Reservations for {date}</h4>
         </div>
 
-        <div id="reservationGrid" className="row row-cols-1">
+        <div id="reservationGrid" className="row row-cols-2">
           {reservations.map((reservation) => (
             <div className="col" key={reservation.reservation_id}>
               <ReservationCard
@@ -49,13 +48,14 @@ function Dashboard({ date }) {
             </div>
           ))}
         </div>
-
         <div className="dateNav">
           <DateNavButtons currentDate={date} />
         </div>
       </main>
     );
-  } else if (reservationsError === null && !reservations.length) {
+  }
+  /* If no error is returned from server and no reservations exist... */
+  else if (reservationsError === null && !reservations.length) {
     return (
       <main>
         <h1>Dashboard</h1>
@@ -69,7 +69,6 @@ function Dashboard({ date }) {
       </main>
     );
   }
-
   /* Server error */
   return (
     <main>
@@ -79,7 +78,6 @@ function Dashboard({ date }) {
       </div>
       <ErrorAlert error={reservationsError} />
     </main>
-  );
+  ); 
 }
-
 export default Dashboard;

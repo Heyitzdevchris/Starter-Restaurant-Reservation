@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
-
 function CreateReservation() {
   const history = useHistory();
   const [error, setError] = useState(undefined);
 
-  //Set initial empty form state
+  // Set initial empty form state //
   const initialFormState = {
     first_name: "",
     last_name: "",
@@ -16,26 +15,23 @@ function CreateReservation() {
     reservation_time: "",
     people: "",
   };
-
   const [reservation, setReservation] = useState({ ...initialFormState });
 
-  //  Handlers  //
+  // Handlers //
   const handleChange = ({ target }) => {
     setReservation({ ...reservation, [target.name]: target.value });
-  };
-  const handleSubmit = ({ event }) => {
+  }
+  const handleSubmit = (event) => {
     event.preventDefault();
     createReservation(reservation)
-      .then((newReservation) =>
-        history.push(`/dashboard?date=${newReservation.reservation_date}`)
-      )
+      .then((newReservation) => history.push(`/dashboard?date=${newReservation.reservation_date}`))
       .catch((error) => setError(error));
   };
   const handleReset = (event) => {
     event.preventDefault();
     setReservation({ ...initialFormState });
   };
-
+  
   if (!error) {
     return (
       <main>
@@ -43,9 +39,7 @@ function CreateReservation() {
         <form onSubmit={handleSubmit}>
           <div className="row mb-3">
             <div className="col">
-              <label htmlFor="first_name" className="form-label">
-                First Name
-              </label>
+              <label htmlFor="first_name" className="form-label">First Name</label>
               <input
                 type="text"
                 name="first_name"
@@ -57,9 +51,7 @@ function CreateReservation() {
               />
             </div>
             <div className="col">
-              <label htmlFor="last_name" className="form-label">
-                Last Name
-              </label>
+              <label htmlFor="last_name" className="form-label">Last Name</label>
               <input
                 type="text"
                 name="last_name"
@@ -72,9 +64,7 @@ function CreateReservation() {
             </div>
           </div>
           <div className="mb-3">
-            <label htmlFor="mobile_number" className="form-label">
-              Mobile Number
-            </label>
+            <label htmlFor="mobile_number" className="form-label">Mobile Number</label>
             <input
               type="tel"
               name="mobile_number"
@@ -87,41 +77,35 @@ function CreateReservation() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="date" className="form-label">
-              Date
-            </label>
-            <input
+            <label htmlFor="date" className="form-label">Date</label>
+            <input 
               type="date"
-              name="reservation_date"
+              name="reservation_date" 
               id="reservation_date"
-              className="form-control"
+              className="form-control" 
               onChange={handleChange}
               value={reservation.reservation_date}
-              placeholder="YYYY-MM-DD"
+              placeholder="YYYY-MM-DD" 
               pattern="\d{4}-\d{2}-\d{2}"
               required
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="time" className="form-label">
-              Time
-            </label>
-            <input
-              type="time"
+            <label htmlFor="time" className="form-label">Time</label>
+            <input 
+              type="time" 
               name="reservation_time"
               id="reservation_time"
-              className="form-control"
+              className="form-control" 
               onChange={handleChange}
               value={reservation.reservation_time}
-              placeholder="HH:MM"
+              placeholder="HH:MM" 
               pattern="[0-9]{2}:[0-9]{2}"
               required
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="people" className="form-label">
-              Number of Guests
-            </label>
+            <label htmlFor="people" className="form-label">Number of Guests</label>
             <input
               type="number"
               name="people"
@@ -134,17 +118,17 @@ function CreateReservation() {
               required
             />
           </div>
-          <button
+          <button 
             type="submit"
             className="btn btn-primary btn-lg"
-            style={{ marginRight: "10px" }}
+            style={{marginRight: "10px"}}
           >
             Submit
           </button>
           <button
             type="reset"
             className="btn btn-secondary btn-lg"
-            style={{ marginRight: "10px" }}
+            style={{marginRight: "10px"}}
             onClick={handleReset}
           >
             Reset Form
@@ -160,7 +144,6 @@ function CreateReservation() {
       </main>
     );
   }
-
   return (
     <main>
       <h1>Create a New Reservation</h1>
@@ -168,5 +151,4 @@ function CreateReservation() {
     </main>
   );
 }
-
 export default CreateReservation;
