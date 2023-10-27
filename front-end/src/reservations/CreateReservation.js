@@ -87,6 +87,22 @@ function CreateReservation() {
             />
           </div>
           <div className="mb-3">
+            <label htmlFor="date" className="form-label">
+              Date
+            </label>
+            <input
+              type="date"
+              name="reservation_date"
+              id="reservation_date"
+              className="form-control"
+              onChange={handleChange}
+              value={reservation.reservation_date}
+              placeholder="YYYY-MM-DD"
+              pattern="\d{4}-\d{2}-\d{2}"
+              required
+            />
+          </div>
+          <div className="mb-3">
             <label htmlFor="time" className="form-label">
               Time
             </label>
