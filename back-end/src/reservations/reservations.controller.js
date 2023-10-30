@@ -12,7 +12,7 @@ async function list(req, res) {
     const data = await service.list(today());
     res.json({ data });
   }
-}
+};
 
 /**
  * Check for data and valid properties
@@ -25,12 +25,14 @@ const VALID_PROPERTIES = [
   "reservation_time",
   "people",
 ];
+
 function hasData(req, res, next) {
   if (req.body.data) {
     return next();
   }
   next({ status: 400, message: "Body must have data property"});
-}
+};
+
 function hasOnlyValidProperties(req, res, next) {
   const { data = {} } = req.body;
   const invalidProperties = Object.keys(data).filter(
@@ -40,7 +42,8 @@ function hasOnlyValidProperties(req, res, next) {
     next({ status: 400, message: `Invalid field(s): ${invalidProperties.join(", ")}`});
   }
   next();
-}
+};
+
 function hasProperties(...properties) {
   return function (req, res, next) {
     const { data = {} } = req.body;
@@ -57,7 +60,8 @@ function hasProperties(...properties) {
       next(error);
     }
   };
-}
+};
+
 function hasValidDate(req, res, next) {
   const { data: { reservation_date } = {} } = req.body;
   const dateRegex = new RegExp(/(?<=\D|^)(?<year>\d{4})(?<sep>[^\w\s])(?<month>1[0-2]|0[1-9])\k<sep>(?<day>0[1-9]|[12][0-9]|(?<=11\k<sep>|[^1][4-9]\k<sep>)30|(?<=1[02]\k<sep>|[^1][13578]\k<sep>)3[01])(?=\D|$)/gm);
@@ -65,29 +69,72 @@ function hasValidDate(req, res, next) {
     next({ status: 400, message: "reservation_date must be a valid date"});
   }
   next();
-}
+};
+
 function hasValidTime(req, res, next) {
-  const { data: { reservation_time } = {} } = req.body;
+  const { reservation_time } = req.body.data;
   const timeRegex = new RegExp(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/);
-  if (!reservation_time.match(timeRegex)) {
+  if (reservation_time && reservation_time !== "" && reservation_time.match(timeRegex)) {
+    next();
+  } else {
     next({ status: 400, message: "reservation_time must be a valid time"});
   }
-  next();
-}
+};
+
 function peopleIsNumber(req, res, next) {
   const { data: { people } = {} } = req.body;
   if (!Number.isInteger(people)) {
     next({ status: 400, message: "people must be a number"});
   }
   next();
-}
+};
+
+function dateIsNotTuesday(req, res, next) {
+  const { reservation_date } = req.body.data;
+  const dateString = reservation_date.split("-");
+  const numDate = new Date(
+    Number(dateString[0]),
+    Number(dateString[1]) - 1,
+    Number(dateString[2]),
+    0,
+    0,
+    1
+  );
+  if (numDate.getDay() === 2) {
+    next({ status: 400, message: "reservation cannot be on a Tuesday" });
+  } else {
+    next();
+  }
+};
+
+function dateIsNotPast(req, res, next) {
+  const { reservation_date } = req.body.data;
+  const today = new Date();
+  const dateString = reservation_date.split("-");
+  const resDate = new Date(
+    Number(dateString[0]),
+    Number(dateString[1]) - 1,
+    Number(dateString[2]),
+    0,
+    0,
+    1
+  );
+  if (resDate > today) {
+  next();
+  } else {
+    next({ status: 400, message: "reservation must be for a future date"});
+  }
+};
+
 /**
  * Create new reservation handler
  */
 async function create(req, res) {
   const data = await service.create(req.body.data);
-  res.status(201).json({ data });
+  console.log("data", data);
+  res.status(201).json({ data: data });
 }
+
 module.exports = {
   create: [
     hasData,
@@ -96,6 +143,8 @@ module.exports = {
     hasValidDate,
     peopleIsNumber,
     hasValidTime,
+    dateIsNotTuesday,
+    dateIsNotPast,
     asyncErrorBoundary(create),
   ],
   list: asyncErrorBoundary(list),
