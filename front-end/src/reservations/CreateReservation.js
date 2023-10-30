@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createReservation } from "../utils/api";
+import CreateErrors from "./CreateErrors";
 import ErrorAlert from "../layout/ErrorAlert";
 function CreateReservation() {
   const history = useHistory();
@@ -67,36 +68,14 @@ function CreateReservation() {
         <h1>Create a New Reservation</h1>
 
         {/* Display reservation creation errors if set to true */}
-        <div
-          className="alert alert-danger alert-dismissible fade show"
-          role="alert"
-          style={{display: tuesdayError ? "block" : "none"}}>
-          <strong>Error</strong>: Cannot make reservation on a Tuesday
-          <button
-            type="button"
-            className="close"
-            data-dismiss="alert"
-            aria-label="Close"
-            onClick={() => setTuesdayError(false)}
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
+        <div>
+          <CreateErrors 
+            tuesdayError={tuesdayError}
+            setTuesdayError={setTuesdayError}
+            previousDateError={previousDateError}
+            setPreviousDateError={setPreviousDateError}
+          />
         </div>
-        <div
-          className="alert alert-danger alert-dismissble fade show"
-          role="alert"
-          style={{display: previousDateError ? "block" : "none"}}>
-          <strong>Error</strong>: Cannot make resservation on a previous date
-          <button
-            type="button"
-            className="close"
-            data-dismiss="alert"
-            aria-label="Close"
-            onClick={() => setPreviousDateError(false)}
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
 
         {/* Reservation Form */}
         <form onSubmit={handleSubmit}>
