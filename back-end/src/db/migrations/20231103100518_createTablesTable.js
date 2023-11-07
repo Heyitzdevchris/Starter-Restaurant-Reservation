@@ -10,6 +10,7 @@ exports.up = function(knex) {
         .references("reservation_id")
         .inTable("reservations")
         .onDelete("SET NULL");
+    table.timestamps(true, true);
   })
 };
 
