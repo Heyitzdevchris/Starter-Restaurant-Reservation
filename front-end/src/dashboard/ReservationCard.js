@@ -1,15 +1,14 @@
 import React from "react";
 
-function ReservationCard(
-  { reservation_id, 
+function ReservationCard({ 
+    reservation_id, 
     first_name, 
     last_name, 
     mobile_number, 
     reservation_date, 
     reservation_time, 
-    people }
-) {
-
+    people 
+  }) {
 
   return (
     <div className="card border-secondary mb-3" style={{maxWidth: "25rem"}}>
