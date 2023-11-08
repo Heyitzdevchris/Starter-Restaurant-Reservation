@@ -17,9 +17,9 @@ import useQuery from "../utils/useQuery";
 function Routes() {
   const query = useQuery();
   const date = query.get("date");
-
+  
   return (
-    <Switch></Switch>
+    <Switch>
 
       <Route exact={true} path="/">
         <Redirect to={"/dashboard"} />
