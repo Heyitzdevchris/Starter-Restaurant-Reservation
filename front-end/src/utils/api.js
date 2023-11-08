@@ -59,7 +59,6 @@ export async function listReservations(params, signal) {
     .then(formatReservationDate)
     .then(formatReservationTime);
 }
-
 /**
  * Saves the reservation to the database.
  * @returns {Promise<[reservation]>}
@@ -76,15 +75,14 @@ export async function createReservation(reservation, signal) {
   };
   return await fetchJson(url, options, reservation);
 }
-
-
 /**
  * Retrieves all existing tables.
  * @returns {Promise<[table]>}
  *  a promise that resolves to a possibly empty array of tables saved in the database.
  */
 export async function listTables(params, signal) {
-
+  const url = `${API_BASE_URL}/tables`;
+  return await fetchJson(url, { headers, signal }, []);
 }
 
 /**
