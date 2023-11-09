@@ -4,7 +4,6 @@ import ReservationCard from "./ReservationCard";
 import TableCard from "./TableCard";
 import DateNavButtons from "./DateNavButtons";
 import ErrorAlert from "../layout/ErrorAlert";
-
 /**
  * Defines the dashboard page.
  * @param date
@@ -17,7 +16,7 @@ function Dashboard({ date }) {
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
   const [tablesError, setTablesError] = useState(null);
-
+  
   // Load Dashboard - reservations and tables //
   useEffect(loadReservationsAndTables, [date]);
 
@@ -54,7 +53,7 @@ function Dashboard({ date }) {
         <div className="d-md-flex mb-3">
           <h4 className="mb-0">Reservations for {date}</h4>
         </div>
-
+        
         {/* Reservations */}
         <div id="reservationGrid" className="row row-cols-3">
           {reservations.map((reservation) => (
@@ -71,16 +70,18 @@ function Dashboard({ date }) {
             </div>
           ))}
         </div>
-
         <div className="dateNav" style={{marginBottom: "17px"}}>
           <DateNavButtons currentDate={date} />
         </div>
 
         {/* Tables */}
+        <div className="d-md-flex mb-3">
+          <h4 className="mb-0">Tables</h4>
+        </div>
         <ErrorAlert error={tablesError} />
         <div id="tableGrid" className="row row-cols-4">
           {tables.map((table) => (
-            <div className="col-sm" key={table.table_id}>
+            <div className="col-sm-3" key={table.table_id}>
               <TableCard
                 table_id={table.table_id}
                 table_name={table.table_name}
