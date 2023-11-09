@@ -17,7 +17,6 @@ function CreateReservation() {
     people: "",
   };
   const [reservation, setReservation] = useState({ ...initialFormState });
-
   // Handlers //
   const handleChange = ({ target }) => {
     setReservation({ ...reservation, [target.name]: target.value });
@@ -40,12 +39,12 @@ function CreateReservation() {
     setReservation({ ...initialFormState });
   };
 
-
-
     return (
       <main>
-        <h1>Create a New Reservation</h1>
-        <ErrorAlert error={error} setError={setError}/>
+        <div className="d-md-flex mb-3">
+          <h1>Create a New Reservation</h1>
+          <ErrorAlert error={error} setError={setError}/>
+        </div>
 
         {/* Reservation Form */}
         <form onSubmit={handleSubmit}>
@@ -156,6 +155,5 @@ function CreateReservation() {
       </main>
     );
   }
-
-
+  
 export default CreateReservation;
