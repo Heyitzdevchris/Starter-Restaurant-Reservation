@@ -16,15 +16,13 @@ function CreateReservation() {
     reservation_time: "",
     people: "",
   };
+  
   const [reservation, setReservation] = useState({ ...initialFormState });
+
   // Handlers //
   const handleChange = ({ target }) => {
     setReservation({ ...reservation, [target.name]: target.value });
   }
-
-  // const day = new Date(reservation.reservation_date).getUTCDay();
-  // const date = new Date(reservation.reservation_date).setHours(0, 0, 0, 0);
-  // const today = new Date().setHours(0, 0, 0, 0);
 
   const handleSubmit = (event) => {
     event.preventDefault();
