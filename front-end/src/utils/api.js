@@ -6,7 +6,7 @@ import formatReservationDate from "./format-reservation-date";
 import formatReservationTime from "./format-reservation-date";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL || "http://localhost:5001";
-  
+
 /**
  * Defines the default headers for these functions to work with `json-server`
  */
@@ -115,6 +115,19 @@ export async function createTable(table, signal) {
   };
   return await fetchJson(url, options, table);
 };
+
+/**
+ * Updates chosen table with given reservation_id
+ * 
+ * @param reservation_id
+ * reservation_id to add to table - specified in body for tests to pass 
+ * @param table_id 
+ * table to assign reservation
+ * @param updatedTable 
+ * table to return from db with newly assigned reservation_id
+ * @returns {Promise<[updateTable]>}
+ * a promise that resolves to the updated table, which will now have a reservation_id
+ */
 
 export async function updateTable(reservation_id, table_id, updatedTable, signal) {
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
