@@ -48,7 +48,6 @@ function Dashboard({ date }) {
 
 
   /* If reservations exist, display info */
-
     return (
       <main>
         <h1>Dashboard</h1>
