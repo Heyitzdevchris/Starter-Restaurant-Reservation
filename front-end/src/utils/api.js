@@ -6,6 +6,7 @@ import formatReservationDate from "./format-reservation-date";
 import formatReservationTime from "./format-reservation-date";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL || "http://localhost:5001";
+  
 /**
  * Defines the default headers for these functions to work with `json-server`
  */
@@ -45,9 +46,10 @@ async function fetchJson(url, options, onCancel) {
     return Promise.resolve(onCancel);
   }
 }
+
 /**
  * Retrieves all existing reservations.
- * @returns {Promise<[reservation]>}
+ * @returns {Promise<[reservations]>}
  *  a promise that resolves to a possibly empty array of reservations saved in the database.
  */
 export async function listReservations(params, signal) {
@@ -59,6 +61,7 @@ export async function listReservations(params, signal) {
     .then(formatReservationDate)
     .then(formatReservationTime);
 }
+
 /**
  * Saves the reservation to the database.
  * @returns {Promise<[reservation]>}
@@ -75,6 +78,17 @@ export async function createReservation(reservation, signal) {
   };
   return await fetchJson(url, options, reservation);
 }
+
+/**
+ * Retrieves a reservation from a given id.
+ * @returns {Promise<[reservation]>}
+ *  a promise that resolves to the reservation.
+ */
+export async function readReservation(reservation_id, signal) {
+  const url = `${API_BASE_URL}/reservations/${reservation_id}`;
+  return await fetchJson(url, { signal }, []);
+}
+
 /**
  * Retrieves all existing tables.
  * @returns {Promise<[table]>}
@@ -92,6 +106,7 @@ export async function listTables(params, signal) {
  */
 export async function createTable(table, signal) {
   const url = `${API_BASE_URL}/tables`;
+  table.capacity = Number(table.capacity);
   const options = {
     method: "POST",
     headers,
@@ -100,3 +115,13 @@ export async function createTable(table, signal) {
   };
   return await fetchJson(url, options, table);
 };
+
+export async function updateTable(reservation_id, table_id, updatedTable, signal) {
+  const url = `${API_BASE_URL}/tables/${table_id}/seat`;
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({ data: { reservation_id: reservation_id } }),
+  };
+  return await fetchJson(url, options, updatedTable);
+}
