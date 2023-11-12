@@ -8,16 +8,15 @@ function TableCard({
   table_name,
   capacity,
   reservation_id
-}) {
-
+})
+ {
   const [error, setError] = useState(null);
 
   const handleFinish = () => {
     if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
-      removeReservation(table_id)
-        .then(() => listTables())
-        .catch((error) => setError(error));
-    }
+        removeReservation(table_id)
+          .then(window.location.reload());
+      }
   }
 
 
@@ -69,5 +68,4 @@ function TableCard({
     </>
   );
 }
-
 export default TableCard;
