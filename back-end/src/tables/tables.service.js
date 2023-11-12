@@ -1,9 +1,11 @@
 const knex = require("../db/connection");
+
 function list() {
   return knex("tables")
     .select("*")
     .orderBy("table_name");
 }
+
 function create(newTable) {
   return knex("tables")
     .insert(newTable)
@@ -34,10 +36,17 @@ function update(updatedTable) {
     .then(updatedRecords => updatedRecords[0]);
 }
 
+function removeReservation(table_id) {
+  return knex("tables")
+    .where({"table_id": table_id})
+    .update('reservation_id', null);
+}
+
 module.exports = {
     create,
     list,
     read,
     readReservation,
     update,
+    removeReservation,
 }
