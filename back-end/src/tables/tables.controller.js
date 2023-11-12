@@ -1,5 +1,6 @@
 const service = require("./tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
+
 /**
  * List handler for table resources
  */
@@ -128,6 +129,15 @@ async function update(req, res) {
   res.json({ data });
 }
 
+/**
+ * Remove reservation_id from table
+ */
+async function removeReservation(req, res) {
+  await service.removeReservation(req.params.table_id);
+  res.sendStatus(204);
+}
+
+
 module.exports = {
     create: [
       hasData,
@@ -146,5 +156,6 @@ module.exports = {
       tableHasSufficientCapacity,
       tableIsOccupied,
       asyncErrorBoundary(update),
-    ]
+    ],
+    removeReservation: asyncErrorBoundary(removeReservation),
 }
