@@ -18,7 +18,10 @@ function Dashboard({ date }) {
   const [tablesError, setTablesError] = useState(null);
 
   // Load Dashboard - reservations and tables //
-  useEffect(loadReservationsAndTables, [date]);
+  useEffect(() => {
+    loadReservationsAndTables();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date]);
 
   function loadReservations() {
     const abortController = new AbortController();
@@ -53,7 +56,6 @@ function Dashboard({ date }) {
           <h4 className="mb-0">Reservations for {date}</h4>
         </div>
         <ErrorAlert error={reservationsError} setError={setReservationsError} />
-
         {/* Reservations */}
         <div id="reservationGrid" className="row row-cols-3">
           {reservations.map((reservation) => (
@@ -73,7 +75,6 @@ function Dashboard({ date }) {
         <div className="dateNav" style={{marginBottom: "17px"}}>
           <DateNavButtons currentDate={date} />
         </div>
-
         {/* Tables */}
         <div className="d-md-flex mb-3">
           <h4 className="mb-0">Tables</h4>
@@ -94,5 +95,4 @@ function Dashboard({ date }) {
       </main>
     );
 }
-
 export default Dashboard;
