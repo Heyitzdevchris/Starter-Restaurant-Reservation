@@ -5,8 +5,7 @@
 import formatReservationDate from "./format-reservation-date";
 import formatReservationTime from "./format-reservation-date";
 const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "https://restaurant-reservation-system-front-end-pf80.onrender.com";
-
+  process.env.REACT_APP_API_BASE_URL || "http://localhost:5001";
 /**
  * Defines the default headers for these functions to work with `json-server`
  */
@@ -90,6 +89,19 @@ export async function readReservation(reservation_id, signal) {
 }
 
 /**
+ * Removes current reservation_id from table.
+ * Does not return anything.
+ */
+export async function removeReservation(table_id, signal){
+  const url = `${API_BASE_URL}/tables/${table_id}/seat`;
+  const options = {
+    method: "DELETE",
+    signal
+  };
+  return await fetchJson(url, options);
+}
+
+/**
  * Retrieves all existing tables.
  * @returns {Promise<[table]>}
  *  a promise that resolves to a possibly empty array of tables saved in the database.
@@ -128,7 +140,6 @@ export async function createTable(table, signal) {
  * @returns {Promise<[updateTable]>}
  * a promise that resolves to the updated table, which will now have a reservation_id
  */
-
 export async function updateTable(reservation_id, table_id, updatedTable, signal) {
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
   const options = {
@@ -137,17 +148,4 @@ export async function updateTable(reservation_id, table_id, updatedTable, signal
     body: JSON.stringify({ data: { reservation_id: reservation_id } }),
   };
   return await fetchJson(url, options, updatedTable);
-}
-
-/**
- * Removes current reservation_id from table.
- * Does not return anything.
- */
-export async function removeReservation(table_id, signal){
-  const url = `${API_BASE_URL}/tables/${table_id}/seat`;
-  const options = {
-    method: "DELETE",
-    signal
-  };
-  return await fetchJson(url, options);
 }
