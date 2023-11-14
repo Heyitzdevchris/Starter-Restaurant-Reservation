@@ -94,7 +94,7 @@ function peopleIsNumber(req, res, next) {
   next();
 }
 
-function IsNotTuesday(req, res, next) {
+function isNotTuesday(req, res, next) {
   const { reservation_date } = req.body.data;
   const dateString = reservation_date.split("-");
   const numDate = new Date(
@@ -112,7 +112,7 @@ function IsNotTuesday(req, res, next) {
   }
 }
 
-function IsNotPastDate(req, res, next) {
+function isNotPastDate(req, res, next) {
   const { reservation_date, reservation_time } = req.body.data;
   const [hour, minute] = reservation_time.split(":");
   let [year, month, day] = reservation_date.split("-");
@@ -150,27 +150,27 @@ function hasDefaultBookedStatus(req, res, next) {
   }
 }
 
- function hasValidStatus(req, res, next) {
-  const validStatuses = ["booked", "seated", "finished"];
+function hasValidStatus(req, res, next) {
+  const validStatuses = ["booked", "seated", "finished", "cancelled"];
   const { status } = req.body.data;
   if (status && !validStatuses.includes(status)) {
     next({ 
       status: 400, 
-      message: `Invalid status: '${status}.' Status must be either 'booked', 'seated', or 'finished.' `
+      message: `Invalid status: '${status}.' Status must be either 'booked', 'seated', 'finished,' or 'cancelled.' `
     });
   } else {
     next();
   }
- }
-
- function isFinished(req, res, next) {
+}
+ 
+function isFinished(req, res, next) {
   const currentStatus = res.locals.reservation.status;
   if (currentStatus === "finished") {
     next({ status: 400, message: "A finished reservation cannot be updated." });
   } else {
     next();
   }
- }
+}
 
 /**
  * Create a new reservation
@@ -222,8 +222,8 @@ module.exports = {
     hasValidDate,
     peopleIsNumber,
     hasValidTime,
-    IsNotTuesday,
-    IsNotPastDate,
+    isNotTuesday,
+    isNotPastDate,
     isWithinBusinessHours,
     hasDefaultBookedStatus,
     asyncErrorBoundary(create),
@@ -235,6 +235,14 @@ module.exports = {
   ],
   update: [
     hasData,
+    hasOnlyValidProperties,
+    hasProperties("first_name", "last_name", "mobile_number", "reservation_date", "reservation_time", "people"),
+    hasValidDate,
+    peopleIsNumber,
+    hasValidTime,
+    isNotTuesday,
+    isNotPastDate,
+    isWithinBusinessHours,
     asyncErrorBoundary(reservationExists),
     hasValidStatus,
     isFinished,
