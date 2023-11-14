@@ -14,8 +14,7 @@ function ReservationCard({
   setReservationsError,
   loadReservationsAndTables
 }) {
-
-
+    
   return (
     <div className="card border-secondary mb-3" style={{maxWidth: "25rem"}}>
       <h4 className="card-header">{last_name}, {first_name}</h4>
@@ -49,11 +48,12 @@ function ReservationCard({
         </span></h5>
 
         {/* Cancel Reservation Button */}
+        {status !== "cancelled" &&
         <CancelReservationButton
           reservation_id={reservation_id}
           setReservationsError={setReservationsError}
           loadReservationsAndTables={loadReservationsAndTables}
-        />
+        />}
       </div>
     </div>
   );
