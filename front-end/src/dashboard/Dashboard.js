@@ -15,11 +15,13 @@ function Dashboard({ date }) {
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
   const [tablesError, setTablesError] = useState(null);
+  
   // Load Dashboard - reservations and tables //
   useEffect(() => {
     loadReservationsAndTables();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date]);
+  }, [date, reservations]);
+
   function loadReservations() {
     const abortController = new AbortController();
     setReservationsError(null);
@@ -28,6 +30,7 @@ function Dashboard({ date }) {
       .catch(setReservationsError);
     return () => abortController.abort();
   }
+
   function loadTables() {
     const abortController = new AbortController();
     setTablesError(null);
@@ -36,12 +39,14 @@ function Dashboard({ date }) {
       .catch(setTablesError);
     return () => abortController.abort();
   }
+
   function loadReservationsAndTables() {
     const abortController = new AbortController();
     loadReservations();
     loadTables();
     return () => abortController.abort();
   }
+
     return (
       <main>
         <h1>Dashboard</h1>
@@ -50,7 +55,6 @@ function Dashboard({ date }) {
           <h4 className="mb-0">Reservations for {date}</h4>
         </div>
         <ErrorAlert error={reservationsError} setError={setReservationsError} />
-
         {/* Reservations */}
         <div className="reservationsList">
           <ReservationsList 
@@ -59,7 +63,6 @@ function Dashboard({ date }) {
             loadReservationsAndTables={loadReservationsAndTables} 
           />
         </div>
-
         <div className="dateNav" style={{marginBottom: "17px"}}>
           <DateNavButtons currentDate={date} />
         </div>
@@ -85,4 +88,6 @@ function Dashboard({ date }) {
       </main>
     );
 }
+
+
 export default Dashboard;
