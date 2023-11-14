@@ -1,3 +1,5 @@
+const service = require("./reservations.service");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const { today } = require("../utils/date-time");
 
 /**
@@ -20,16 +22,13 @@ async function list(req, res) {
  * Check for data and valid properties
  */
 const VALID_PROPERTIES = [
-  "reservation_id",
   "first_name",
   "last_name",
   "mobile_number",
   "reservation_date",
   "reservation_time",
   "people",
-  "status",
-  "created_at",
-  "updated_at"
+  "status"
 ];
 
 function hasData(req, res, next) {
@@ -128,8 +127,7 @@ function isNotPastDate(req, res, next) {
       message: "reservation date and time must be set in the future",
     });
   }
-}
-
+};
 function isWithinBusinessHours(req, res, next) {
   const { reservation_time } = req.body.data;
   if (reservation_time >= "10:30" && reservation_time <= "21:30") {
@@ -214,6 +212,7 @@ async function update(req, res) {
   res.json({ data });
 }
 
+
 module.exports = {
   create: [
     hasData,
@@ -232,20 +231,6 @@ module.exports = {
   read: [
     asyncErrorBoundary(reservationExists),
     read,
-  ],
-  update: [
-    asyncErrorBoundary(reservationExists),
-    hasData,
-    hasOnlyValidProperties,
-    hasProperties("first_name", "last_name", "mobile_number", "reservation_date", "reservation_time", "people"),
-    hasValidDate,
-    peopleIsNumber,
-    hasValidTime,
-    isNotTuesday,
-    isNotPastDate,
-    isWithinBusinessHours,
-    hasDefaultBookedStatus,
-    asyncErrorBoundary(update),
   ],
   updateStatus: [
     hasData,
