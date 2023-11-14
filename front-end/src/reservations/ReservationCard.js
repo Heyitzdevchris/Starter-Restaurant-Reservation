@@ -10,9 +10,12 @@ function ReservationCard({
   reservation_date, 
   reservation_time, 
   people,
-  status 
+  status,
+  setReservationsError,
+  loadReservationsAndTables
 }) {
-    
+
+
   return (
     <div className="card border-secondary mb-3" style={{maxWidth: "25rem"}}>
       <h4 className="card-header">{last_name}, {first_name}</h4>
@@ -21,13 +24,12 @@ function ReservationCard({
         <h6 className="card-subtitle mb-2 text-muted">Guests: {people}</h6>
         <h6 className="card-subtitle mb-2 text-muted">Mobile Number: {mobile_number}</h6>
       </div>
-
       <div 
         className="card-footer border-secondary text-secondary"
         id="resCardFooter"
         style={{textAlign: "right"}}
         >
-
+        
         {/* Seat Button */}
         {status === "booked" &&
           <a 
@@ -38,7 +40,6 @@ function ReservationCard({
             Seat
           </a>
         }
-
         {/* Status Badge */}
         <h5><span 
           className="badge bg-info text-light"
@@ -48,9 +49,15 @@ function ReservationCard({
         </span></h5>
 
         {/* Cancel Reservation Button */}
-        <CancelReservationButton reservation_id={reservation_id} />
+        <CancelReservationButton
+          reservation_id={reservation_id}
+          setReservationsError={setReservationsError}
+          loadReservationsAndTables={loadReservationsAndTables}
+        />
       </div>
     </div>
   );
 }
+
+
 export default ReservationCard;
