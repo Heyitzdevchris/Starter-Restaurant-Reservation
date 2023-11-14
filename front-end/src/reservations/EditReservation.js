@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { readReservation } from "../utils/api";
+import { readReservation, updateReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function EditReservation() {
@@ -9,6 +9,7 @@ function EditReservation() {
   
   const [error, setError] = useState(null);
   const [reservation, setReservation] = useState("");
+
 
   // Load reservation by id //
   useEffect(() => {
@@ -20,13 +21,25 @@ function EditReservation() {
   }, [reservation_id]);
 
 
+  // Handlers //
+  const handleChange = ({ target }) => {
+    setReservation({ ...reservation, [target.name]: target.value });
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    updateReservation(reservation)
+      .then(history.go(-1))
+      .catch((error) => setError(error));
+  };
+
+
   return (
     <main>
       <div className="d-md-flex mb-3">
         <h1>Edit Reservation</h1>
         <ErrorAlert error={error} setError={setError} />
       </div>
-
       {/* Reservation Form */}
       <form onSubmit={handleSubmit}>
         <div className="row mb-3">
@@ -57,7 +70,6 @@ function EditReservation() {
             />
           </div>
         </div>
-
         <div className="mb-3">
           <label htmlFor="mobile_number" className="form-label">Mobile Number</label>
           <input
@@ -72,14 +84,12 @@ function EditReservation() {
             required
           />
         </div>
-
         <div className="mb-3">
           <label htmlFor="date" className="form-label">Date</label>
           <input 
             type="date"
             name="reservation_date" 
             id="reservation_date"
-            placeholder={reservation.reservation_date}
             className="form-control" 
             onChange={handleChange}
             value={reservation.reservation_date}
@@ -87,7 +97,6 @@ function EditReservation() {
             required
           />
         </div>
-
         <div className="mb-3">
           <label htmlFor="time" className="form-label">Time</label>
            <input 
@@ -102,7 +111,6 @@ function EditReservation() {
             required
           />
         </div>
-
         <div className="mb-3">
           <label htmlFor="people" className="form-label">Number of Guests</label>
           <input
@@ -118,7 +126,6 @@ function EditReservation() {
             required
           />
          </div>
-
         <button 
           type="submit"
           className="btn btn-primary btn-lg"
@@ -126,14 +133,7 @@ function EditReservation() {
         >
           Submit
         </button>
-         <button
-          type="reset"
-           className="btn btn-secondary btn-lg"
-          style={{marginRight: "10px"}}
-          onClick={handleReset}
-        >
-          Reset Form
-        </button>
+
          <button
           type="button"
           className="btn btn-secondary btn-lg"
@@ -141,7 +141,6 @@ function EditReservation() {
         >
           Cancel
         </button>
-
       </form>
     </main>
   );
