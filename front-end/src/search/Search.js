@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import ReservationsList from "../reservations/ReservationsList";
 import ErrorAlert from "../layout/ErrorAlert";
+import { listReservations } from "../utils/api";
 import "./Search.css";
 
 function Search() {
   const [error, setError] = useState(null);
-
   const [mobile, setMobile] = useState("");
   const [reservations, setReservations] = useState([]);
-
   // Change handler //
   const handleChange = ({ target }) => {
     setMobile(target.value);
@@ -16,8 +15,11 @@ function Search() {
   // Handle find //
   const handleFind = (event) => {
     event.preventDefault();
-    // run api function
-    // set reservations
+    console.log(mobile);
+    // Does this work?
+    listReservations({ mobile })
+      .then((reservations) => setReservations(reservations))
+      .catch((error) => setError(error));
   }
 
   return (
@@ -26,7 +28,6 @@ function Search() {
         <h1>Reservation Search</h1>
         <ErrorAlert error={error} setError={setError} />
       </div>
-
     {/* Search Box */}
       <div className="input-group mb-3" id="mobileSearchBox">
         <input 
@@ -51,11 +52,14 @@ function Search() {
 
     {/* Reservations */}
     <div className="reservationsList">
+      {reservations ? 
         <ReservationsList reservations={reservations} />
+        :
+        "No reservations found"
+      }
     </div>
 
     </main>
   );
 }
-
 export default Search;
