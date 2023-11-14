@@ -6,10 +6,9 @@ import ErrorAlert from "../layout/ErrorAlert";
 function EditReservation() {
   const history = useHistory();
   const reservation_id = useParams().reservation_id;
-  
+
   const [error, setError] = useState(null);
   const [reservation, setReservation] = useState("");
-
 
   // Load reservation by id //
   useEffect(() => {
@@ -20,7 +19,6 @@ function EditReservation() {
     loadReservation();
   }, [reservation_id]);
 
-
   // Handlers //
   const handleChange = ({ target }) => {
     setReservation({ ...reservation, [target.name]: target.value });
@@ -28,9 +26,12 @@ function EditReservation() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    updateReservation(reservation)
-      .then(history.go(-1))
-      .catch((error) => setError(error));
+    try {
+      updateReservation(reservation)
+        .then(history.go(-1));
+    } catch (error) {
+      setError(error);
+    }
   };
 
 
@@ -52,7 +53,7 @@ function EditReservation() {
               placeholder={reservation.first_name}
               className="form-control"
               onChange={handleChange}
-              value={reservation.first_name}
+              value={`${reservation.first_name}`}
               required
             />
           </div>
@@ -65,7 +66,7 @@ function EditReservation() {
               placeholder={reservation.last_name}
               className="form-control"
               onChange={handleChange}
-              value={reservation.last_name}
+              value={`${reservation.last_name}`}
               required
             />
           </div>
@@ -79,7 +80,7 @@ function EditReservation() {
             placeholder={reservation.mobile_number}
             className="form-control"
             onChange={handleChange}
-            value={reservation.mobile_number}
+            value={`${reservation.mobile_number}`}
             pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
             required
           />
@@ -92,7 +93,7 @@ function EditReservation() {
             id="reservation_date"
             className="form-control" 
             onChange={handleChange}
-            value={reservation.reservation_date}
+            value={`${reservation.reservation_date}`}
             pattern="\d{4}-\d{2}-\d{2}"
             required
           />
@@ -106,7 +107,7 @@ function EditReservation() {
             placeholder={reservation.reservation_time}
             className="form-control" 
             onChange={handleChange}
-            value={reservation.reservation_time} 
+            value={`${reservation.reservation_time}`} 
             pattern="[0-9]{2}:[0-9]{2}"
             required
           />
@@ -120,7 +121,7 @@ function EditReservation() {
             placeholder={reservation.people}
             className="form-control"
             onChange={handleChange}
-            value={reservation.people}
+            value={`${reservation.people}`}
             min="1"
             max="8"
             required
@@ -133,7 +134,7 @@ function EditReservation() {
         >
           Submit
         </button>
-
+        
          <button
           type="button"
           className="btn btn-secondary btn-lg"
