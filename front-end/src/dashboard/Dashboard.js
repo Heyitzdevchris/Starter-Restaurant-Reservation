@@ -15,12 +15,12 @@ function Dashboard({ date }) {
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
   const [tablesError, setTablesError] = useState(null);
-  
+
   // Load Dashboard - reservations and tables //
   useEffect(() => {
     loadReservationsAndTables();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date, reservations]);
+  }, [date]);
 
   function loadReservations() {
     const abortController = new AbortController();
