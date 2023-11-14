@@ -114,8 +114,8 @@ export async function removeReservation(table_id, signal){
  */
 export async function updateReservation(updatedReservation, signal) {
   const url = `${API_BASE_URL}/reservations/${updatedReservation.reservation_id}`;
-  updateReservation.people = Number(updatedReservation.people);
-  updatedReservation.reservation_time = updateReservation.reservation_time.slice(0, 5);
+  updatedReservation.people = Number(updatedReservation.people);
+  updatedReservation.reservation_time = updatedReservation.reservation_time.slice(0, 5);
   const options = {
     method: "PUT",
     headers,
@@ -164,7 +164,7 @@ export async function createTable(table, signal) {
     signal,
   };
   return await fetchJson(url, options, table);
-};
+}
 
 /**
  * Updates chosen table with given reservation_id
