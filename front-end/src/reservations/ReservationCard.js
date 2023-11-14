@@ -14,10 +14,19 @@ function ReservationCard({
   setReservationsError,
   loadReservationsAndTables
 }) {
-    
+
   return (
     <div className="card border-secondary mb-3" style={{maxWidth: "25rem"}}>
-      <h4 className="card-header">{last_name}, {first_name}</h4>
+      <h4 className="card-header d-flex justify-content-between align-items-center">
+        {last_name}, {first_name}
+        {status === "booked" && <a 
+          type="button" 
+          className="btn btn-outline-secondary"
+          href={`/reservations/${reservation_id}/edit`}
+        >
+          Edit
+        </a>}
+      </h4>
       <div className="card-body">
         <h5 className="card-title">{reservation_time}, {reservation_date}</h5>
         <h6 className="card-subtitle mb-2 text-muted">Guests: {people}</h6>
@@ -37,8 +46,8 @@ function ReservationCard({
             href={`/reservations/${reservation_id}/seat`} 
             role="button">
             Seat
-          </a>
-        }
+          </a>}
+
         {/* Status Badge */}
         <h5><span 
           className="badge bg-info text-light"
@@ -46,7 +55,6 @@ function ReservationCard({
           data-reservation-id-status={reservation_id}>
             {status}
         </span></h5>
-
         {/* Cancel Reservation Button */}
         {status !== "cancelled" &&
         <CancelReservationButton
