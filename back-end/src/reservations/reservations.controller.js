@@ -18,17 +18,21 @@ async function list(req, res) {
     res.json({ data });
   }
 }
+
 /**
  * Check for data and valid properties
  */
 const VALID_PROPERTIES = [
+  "reservation_id",
   "first_name",
   "last_name",
   "mobile_number",
   "reservation_date",
   "reservation_time",
   "people",
-  "status"
+  "status",
+  "created_at",
+  "updated_at"
 ];
 
 function hasData(req, res, next) {
@@ -119,6 +123,7 @@ function isNotPastDate(req, res, next) {
   month -= 1;
   const reservationDate = new Date(year, month, day, hour, minute, 59, 59).getTime();
   const today = new Date().getTime();
+
   if (reservationDate > today) {
     next();
   } else {
@@ -128,6 +133,7 @@ function isNotPastDate(req, res, next) {
     });
   }
 };
+
 function isWithinBusinessHours(req, res, next) {
   const { reservation_time } = req.body.data;
   if (reservation_time >= "10:30" && reservation_time <= "21:30") {
@@ -231,6 +237,20 @@ module.exports = {
   read: [
     asyncErrorBoundary(reservationExists),
     read,
+  ],
+  update: [
+    asyncErrorBoundary(reservationExists),
+    hasData,
+    hasOnlyValidProperties,
+    hasProperties("first_name", "last_name", "mobile_number", "reservation_date", "reservation_time", "people"),
+    hasValidDate,
+    peopleIsNumber,
+    hasValidTime,
+    isNotTuesday,
+    isNotPastDate,
+    isWithinBusinessHours,
+    hasDefaultBookedStatus,
+    asyncErrorBoundary(update),
   ],
   updateStatus: [
     hasData,
