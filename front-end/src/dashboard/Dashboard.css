@@ -1,38 +1,47 @@
+h1, h2 {
+  text-align: right;
+}
+
 .reservations-list {
-    background-color: rgb(7, 66, 77, 0.9);
-    border: none;
-    border-radius: 15px;
-    filter: drop-shadow(10px 12px 0.75rem #07434dc4);
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .reservations-list h4 {
-    color: #F8F8F4;
-  
-  }
-  
-  .reservations-list .card {
-    border: none;
-    border-radius: 10px;
-  }
-  
-  .reservations-list .card-header {
-    color: #1F2A38;
-  }
-  
-  
-  .tables-list {
-    background-color: white;
-    border-radius: 15px;
-    /* filter: drop-shadow(10px 12px 0.75rem #d84949d2); */
-    padding: 10px;
-  }
-  
-  .tables-list h4 {
-    color: #07434dc4;
-  }
-  
-  .tables-list .card {
-    border: none;
-  }
+  background-color: #423E3B;
+  border: none;
+  border-radius: 15px;
+  filter: drop-shadow(10px 12px 0.75rem #423E3B);
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.reservations-list h4 {
+  color: #F8F8F4;
+}
+
+.reservations-list .card {
+  max-width: 20rem;
+}
+
+.reservations-list .card-header {
+  color: #1F2A38;
+}
+
+
+.btn-toolbar {
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+
+.tables-list {
+  background-color: #FEA82F;
+  border-radius: 15px;
+  filter: drop-shadow(10px 12px 0.75rem #FEA82F);
+  padding: 20px;
+}
+
+.tables-list h4 {
+  color: #F8F8F4;
+}
+
+.tables-list .card {
+  border: none;
+  margin: 5px 3px;
+}
