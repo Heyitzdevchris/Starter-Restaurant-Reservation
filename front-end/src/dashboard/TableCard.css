@@ -1,29 +1,37 @@
-  #tableGrid .card {
-    border-radius: 40px;
-    position: relative;
-    margin-bottom: 10px;
-  }
-  
-  /* Mel - help with position of badge to stay inside card */
-  #tableGrid .badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    border-radius: 10px 25px 10px 10px;
-    font-size: small;
-  }
-  
-  #tableGrid .alert {
-    margin-bottom: 0px;
-    text-align: center;
-  }
+#tableGrid .card {
+  border-radius: 40px;
+  position: relative;
+  margin-bottom: 10px;
+}
 
-  #statusWithFinishButton {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  #finishButton {
-    border: none;
-  }
+#tableGrid .col-sm {
+  padding: 0px 7px;
+}
+
+/* Mel - help with position of badge to stay inside card */
+#tableGrid .badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border-radius: 10px 25px 10px 10px;
+  font-size: small;
+}
+#tableGrid .alert {
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+#statusWithFinishButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#finishButton {
+  margin-top: 10px;
+  padding: 5px 20px;
+  background-color: #1F2A38;
+  color: white;
+  border: none;
+}
