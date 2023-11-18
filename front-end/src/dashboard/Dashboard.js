@@ -17,7 +17,7 @@ function Dashboard({ date }) {
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
   const [tablesError, setTablesError] = useState(null);
-  
+
   // Load Dashboard - reservations and tables //
   useEffect(() => {
     loadReservationsAndTables();
@@ -56,7 +56,6 @@ function Dashboard({ date }) {
           {!reservations.length && <h2>No reservations on this date.</h2>}
         </div>
         <ErrorAlert error={reservationsError} setError={setReservationsError} />
-
         {/* Reservations */}
         <div className="reservations-list">
           <h4 className="mb-2">Reservations for {date}</h4>
@@ -66,7 +65,8 @@ function Dashboard({ date }) {
             loadReservationsAndTables={loadReservationsAndTables} 
           />
         </div>
-        <div className="dateNav" style={{marginBottom: "17px"}}>
+
+        <div className="date-nav">
           <DateNavButtons currentDate={date} />
         </div>
 
@@ -76,9 +76,9 @@ function Dashboard({ date }) {
             <h4 className="mb-0">Tables</h4>
           </div>
           <ErrorAlert error={tablesError} setError={setTablesError} />
-          <div id="tableGrid" className="row row-cols-4">
+          <div id="tableGrid" className="row row-cols-2">
             {tables.map((table) => (
-              <div className="col-sm-3" key={table.table_id}>
+              <div className="col-sm" key={table.table_id}>
                 <TableCard
                   table_id={table.table_id}
                   table_name={table.table_name}
