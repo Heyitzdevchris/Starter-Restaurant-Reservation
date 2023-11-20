@@ -20,6 +20,7 @@ function ReservationCard({
     <div className="card h-100 w-100 border-secondary mb-3">
       <h4 className="card-header d-flex justify-content-between align-items-center">
         {last_name}, {first_name}
+        {/* Edit Button */}
         {status === "booked" && <a 
           type="button" 
           className="btn btn-outline-secondary"
