@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { removeReservation } from "../utils/api";
 import "./TableCard.css";
-import { Icon } from '@iconify/react';
+// import { Icon } from '@iconify/react';
 
 function TableCard({
   table_id,
@@ -35,7 +35,7 @@ function TableCard({
     <div className="card">
       <div className="card-body">
       <span className="badge capacity-badge">
-          <Icon className="people-icon" icon="bi:people" color="#f8f8f4" />
+          {/* <Icon className="people-icon" icon="bi:people" color="#f8f8f4" /> */}
           {capacity}
         </span>
         <h6 className="card-title">{table_name}</h6>
