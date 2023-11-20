@@ -1,5 +1,6 @@
 import React from "react";
 import CancelReservationButton from "./CancelReservationButton";
+import { Link } from 'react-router-dom'
 import "./ReservationCard.css";
 
 function ReservationCard({ 
@@ -21,13 +22,11 @@ function ReservationCard({
       <h4 className="card-header d-flex justify-content-between align-items-center">
         {last_name}, {first_name}
         {/* Edit Button */}
-        {status === "booked" && <a 
-          type="button" 
+        {status === "booked" && <Link to={`/reservations/${reservation_id}/edit`}
           className="btn btn-outline-secondary"
-          href={`/reservations/${reservation_id}/edit`}
         >
           Edit
-        </a>}
+        </Link>}
       </h4>
       <div className="card-body">
         <h5 className="card-title">{reservation_time}, {reservation_date}</h5>
