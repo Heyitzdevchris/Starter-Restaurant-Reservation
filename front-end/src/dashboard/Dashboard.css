@@ -3,10 +3,10 @@ h1, h2 {
 }
 
 .reservations-list {
-  background-color: #423E3B;
+  background-color: #2B2118;
   border: none;
   border-radius: 15px;
-  filter: drop-shadow(10px 12px 0.75rem #423E3B);
+  filter: drop-shadow(10px 12px 0.75rem #2B2118);
   padding: 20px;
   margin-bottom: 40px;
 }
@@ -31,9 +31,9 @@ h1, h2 {
 
 
 .tables-list {
-  background-color: #FEA82F;
+  background-color: #A8763E;
   border-radius: 15px;
-  filter: drop-shadow(10px 12px 0.75rem #FEA82F);
+  filter: drop-shadow(10px 12px 0.75rem #A8763E);
   padding: 20px;
 }
 
