@@ -41,13 +41,12 @@ function ReservationCard({
         
         {/* Seat Button */}
         {status === "booked" &&
-          <a 
+          <Link to={`/reservations/${reservation_id}/seat`}
             className="btn btn-secondary" 
             id="seatButton"
-            href={`/reservations/${reservation_id}/seat`} 
-            role="button">
+          >
             Seat
-          </a>}
+          </Link>}
 
         {/* Status Badge */}
         <h5><span 
