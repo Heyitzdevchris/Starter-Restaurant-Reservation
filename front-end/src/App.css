@@ -42,7 +42,7 @@ h2 {
 .form-control {
     opacity: 0.85;
     margin-bottom: 8px;
-    filter: drop-shadow(5px -2px 0.65rem #2B2118);
+    filter: drop-shadow(0.5px 0.5px 0.12rem #A8763E);
 }
 
 .form-label {
