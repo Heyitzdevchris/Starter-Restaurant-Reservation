@@ -8,14 +8,19 @@
   padding: 0px 7px;
 }
 
-/* Mel - help with position of badge to stay inside card */
-#tableGrid .badge {
+.badge {
+  padding-top: 5px;
+  width: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: absolute;
   top: 12px;
   right: 12px;
   border-radius: 10px 25px 10px 10px;
   font-size: small;
 }
+
 #tableGrid .alert {
   margin-bottom: 0px;
   text-align: center;
