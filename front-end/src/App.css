@@ -13,13 +13,13 @@
 */ 
 
 body {
-    background-color: #FFFECB;
+    background-color: #ECF0F1;
     box-sizing: border-box;
     font-family: 'Khula', sans-serif;
 }
 
 .side-bar {
-    background-color: #423E3B;
+    background-color: #2B2118;
 }
 .sidebar-brand-text {
     color: #F8F8F4;
@@ -32,11 +32,11 @@ h1 {
     font-weight: 900;
     font-size: 3em;
     letter-spacing: 2px;
-    color: #423E3B;
+    color: #2B2118;
 }
 
 h2 {
-    color: #423E3B;
+    color: #2B2118;
 }
 
 .card {
@@ -48,11 +48,11 @@ h2 {
 }
 
 .btn-group {
-    background-color: #FF2E00;
+    background-color: #6F1A07;
     border-radius: 10px;
 }
 
 .badge {
-    background-color: #423E3B;
+    background-color: 423E3B;
     color: white;
 }
