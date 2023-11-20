@@ -39,6 +39,19 @@ h2 {
     color: #2B2118;
 }
 
+.form-control {
+    opacity: 0.85;
+    margin-bottom: 8px;
+    filter: drop-shadow(5px -2px 0.65rem #2B2118);
+}
+
+.form-label {
+  background-color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  opacity: 0.9;
+}
+
 .card {
     background-color: #F8F8F4;
 }
