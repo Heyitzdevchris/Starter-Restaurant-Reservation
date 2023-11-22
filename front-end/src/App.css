@@ -39,6 +39,10 @@ h2 {
     color: #2B2118;
 }
 
+.btn {
+    padding: 7px 15px 4px;
+}
+
 .form-control {
     opacity: 0.85;
     margin-bottom: 8px;
