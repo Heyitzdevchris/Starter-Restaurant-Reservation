@@ -4,6 +4,8 @@ h1, h2 {
   text-align: right;
 }
 
+/* Reservation Cards */
+
 .reservations-list {
   background-color: #2B2118;
   border: none;
@@ -25,12 +27,14 @@ h1, h2 {
   color: #1F2A38;
 }
 
+/* Button Toolbar Nav */
 
 .btn-toolbar {
   justify-content: center;
   margin-bottom: 30px;
 }
 
+/* Table Cards */
 
 .tables-list {
   background-color: #A8763E;
