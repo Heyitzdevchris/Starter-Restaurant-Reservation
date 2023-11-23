@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { listReservations, listTables } from "../utils/api";
 import ReservationsList from "../reservations/ReservationsList";
-import TableCard from "./TableCard";
+import TableCard from "../tables/TableCard";
 import DateNavButtons from "./DateNavButtons";
 import ErrorAlert from "../layout/ErrorAlert";
 import "./Dashboard.css";
