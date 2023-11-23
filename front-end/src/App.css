@@ -11,6 +11,11 @@ body {
     font-family: 'Khula', sans-serif;
 }
 
+/* Side bar spans height of page */
+.container-fluid .side-bar {
+    padding-bottom: 100%;
+  }
+
 .side-bar {
     background-color: #2B2118;
 }
@@ -65,4 +70,11 @@ h2 {
 .badge {
     background-color: #423E3B;
     color: white;
+}
+
+@media (max-width: 45em) {
+    .container-fluid .side-bar {
+        height: 140px;
+        padding-bottom: 0px;
+    }
 }
