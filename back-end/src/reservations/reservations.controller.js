@@ -177,6 +177,17 @@ function isFinished(req, res, next) {
   }
 }
 
+function isValidMobileNumber(req, res, next) {
+  const { data: { mobile_number } = {} } = req.body;
+  const mobileNumberRegex = /^\d+$/;
+
+  if (!mobile_number || !mobile_number.match(mobileNumberRegex)) {
+    next({ status: 400, message: "mobile_number must contain only numbers" });
+  } else {
+    next();
+  }
+}
+
 /**
  * Create a new reservation
  */
@@ -224,6 +235,7 @@ module.exports = {
     hasData,
     hasOnlyValidProperties,
     hasProperties("first_name", "last_name", "mobile_number", "reservation_date", "reservation_time", "people"),
+    isValidMobileNumber,
     hasValidDate,
     peopleIsNumber,
     hasValidTime,
