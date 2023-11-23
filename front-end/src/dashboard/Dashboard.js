@@ -66,10 +66,10 @@ function Dashboard({ date }) {
           />
         </div>
 
+        {/* Button Toolbar */}
         <div className="date-nav">
           <DateNavButtons currentDate={date} />
         </div>
-
         {/* Tables */}
         <div className="tables-list">
           <div className="d-md-flex mb-3">
