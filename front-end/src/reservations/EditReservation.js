@@ -128,17 +128,15 @@ function EditReservation() {
         <button 
           type="submit"
           className="btn btn-primary btn-lg"
-           style={{marginRight: "10px"}}
-        >
-          Submit
+           style={{marginRight: "10px"}}>
+            Submit
         </button>
         
          <button
           type="button"
           className="btn btn-secondary btn-lg"
-          onClick={() => history.go(-1)}
-        >
-          Cancel
+          onClick={() => history.go(-1)}>
+            Cancel
         </button>
       </form>
     </main>

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { cancelReservation } from "../utils/api";
-
 function CancelReservationButton({ reservation_id, setReservationsError, loadReservationsAndTables }) {
   
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  
   const handleOk = (event) => {
     event.preventDefault();
     // Want to use modal - come back to this later. //
@@ -20,7 +19,6 @@ function CancelReservationButton({ reservation_id, setReservationsError, loadRes
     }
   };
 
-
   return (
     <>
       <button
@@ -28,10 +26,10 @@ function CancelReservationButton({ reservation_id, setReservationsError, loadRes
         className="btn btn-danger"
         // Use handleShow here for modal
         onClick={handleOk}
-        data-reservation-id-cancel={reservation_id}
-      >
-        Cancel
+        data-reservation-id-cancel={reservation_id}>
+          Cancel
       </button>
+
       {/* Modal */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>
@@ -50,6 +48,5 @@ function CancelReservationButton({ reservation_id, setReservationsError, loadRes
     </>
   );
 }
-
 
 export default CancelReservationButton;

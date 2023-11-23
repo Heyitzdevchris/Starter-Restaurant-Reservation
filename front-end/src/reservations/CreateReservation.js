@@ -17,7 +17,7 @@ function CreateReservation() {
     reservation_time: "",
     people: "",
   };
-  
+
   const [reservation, setReservation] = useState({ ...initialFormState });
 
   // Handlers //
@@ -44,7 +44,7 @@ function CreateReservation() {
           <h1>Create a New Reservation</h1>
           <ErrorAlert error={error} setError={setError}/>
         </div>
-
+        
         {/* Reservation Form */}
         <form onSubmit={handleSubmit}>
           <div className="row mb-3">
@@ -131,28 +131,26 @@ function CreateReservation() {
           <button 
             type="submit"
             className="btn btn-primary btn-lg"
-            style={{marginRight: "10px"}}
-          >
-            Submit
+            style={{marginRight: "10px"}}>
+              Submit
           </button>
           <button
             type="reset"
             className="btn btn-secondary btn-lg"
             style={{marginRight: "10px"}}
-            onClick={handleReset}
-          >
-            Reset Form
+            onClick={handleReset}>
+              Reset Form
           </button>
           <button
             type="button"
             className="btn btn-secondary btn-lg"
-            onClick={() => history.go(-1)}
-          >
-            Cancel
+            onClick={() => history.go(-1)}>
+              Cancel
           </button>
+
         </form>
       </main>
     );
   }
-  
+
 export default CreateReservation;
